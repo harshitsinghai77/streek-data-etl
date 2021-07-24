@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "cliff-ai"
+version = "0.1.0"
+description = "Backend to interact with the database using FAST API."
+authors = ["harshitsinghai77 <harshitsinghai77@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "3.9"
+fastapi = "^0.67.0"
+uvicorn = {extras = ["standard"], version = "^0.14.0"}
+databases = {extras = ["postgresql"], version = "^0.4.3"}
+psycopg2 = "^2.9.1"
+python-dotenv = "^0.19.0"
+
+[tool.poetry.dev-dependencies]
+mypy = "^0.910"
+black = "^21.7b0"
+isort = "^5.9.2"
+autoflake = "^1.4"
+flake8 = "^3.9.2"
+pytest = "^6.2.4"
+sqlalchemy-stubs = "^0.4"
+pytest-cov = "^2.12.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
