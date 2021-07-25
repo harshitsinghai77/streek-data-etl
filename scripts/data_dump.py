@@ -1,3 +1,4 @@
+"""Helper module to dump csv file to the postgres database."""
 import psycopg2
 
 DATABASE_URL = "postgresql://cliff:password@localhost:5432/cliff"

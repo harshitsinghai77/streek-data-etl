@@ -11,10 +11,13 @@ runserver:
 	uvicorn main:app --reload
 
 docker_image:
-	docker build -t noiist-app .
+	docker build -t cliff-app .
 
 start_docker_container:
-	docker run -d --name noiist-app -p 5000:5000 noiist-app
+	docker run -d --name cliff-app -p 5000:5000 cliff-app
+
+dump_sample_data:
+	docker exec -i cliff-data-etl_postgresql_1 pg_restore -U cliff -v -d cliff < dev/dump/sample.dump
   
 format:
 	bash format.sh
