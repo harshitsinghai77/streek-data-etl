@@ -52,7 +52,7 @@ class Item:
 
     @staticmethod
     async def count_discounted_products():
-        "Count products having a discount on them."
+        "Count items having a discount on them."
         dicount_amount = item.c.regular_price_value - item.c.offer_price_value
         query = item.count().where(dicount_amount > 0)
         count = await database.execute(query)
@@ -67,7 +67,7 @@ class Item:
 
     @staticmethod
     async def count_offer_price_greater_than(value: int = 300):
-        """No. of products having offer price greater than a value."""
+        """Items with offer_price greater than a given value."""
         query = item.count().where(item.c.offer_price_value > value)
         results = await database.execute(query)
         return results
@@ -75,6 +75,7 @@ class Item:
     @staticmethod
     async def calculate_discount_percentage(value: int = 30):
         """
+        Items with discount % greater than a given value.
         To calculate the discount percentage following approach is used:
         1. Subtract the regular_price_value from offer_price_value.
         2. Divide this new number by the regular_price_value.

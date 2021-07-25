@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 
 class ItemBase(BaseModel):
-    """Shared properties"""
+    """Shared properties."""
 
     name: Optional[str]
     brand_name: Optional[str]
@@ -19,13 +19,13 @@ class ItemBase(BaseModel):
 
 
 class ItemRead(ItemBase):
-    """Properties shared by models stored in DB"""
+    """Properties shared by models stored in DB."""
 
     id: int
 
 
 class ItemCreate(ItemBase):
-    """Properties to receive on item update"""
+    """Properties to receive on item update."""
 
     name: str
     brand_name: str
@@ -36,26 +36,34 @@ class ItemCreate(ItemBase):
 
 
 class ItemUpdate(ItemBase):
-    """Properties to receive on item update"""
+    """Properties to receive on item update."""
 
     pass
 
 
 class UniqueBrands(BaseModel):
+    """Properties to get unique brands in the database."""
+
     count_unique_brands: int
     unique_brands: List[str]
 
 
 class CountOfferPrice(BaseModel):
+    """Properties to count offer price."""
+
     count: int
 
 
 class Discount(BaseModel):
+    """Single dicount entry."""
+
     name: str
     brand_name: str
     discount_percentage: int
 
 
 class DiscountPercentage(BaseModel):
+    """Properties for DiscountPercentage."""
+
     count: int
     items: List[Discount]

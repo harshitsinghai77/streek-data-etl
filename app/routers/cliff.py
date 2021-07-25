@@ -21,6 +21,7 @@ cliff_router = APIRouter()
 
 @cliff_router.get("/items", response_model=List[ItemRead])
 async def read_item(skip: int = 0, limit: int = 100):
+    """Read all items in the database."""
     items = await Item.get(limit=limit, skip=skip)
     if not items:
         raise HTTPException(status_code=404, detail="No items found")
@@ -29,6 +30,7 @@ async def read_item(skip: int = 0, limit: int = 100):
 
 @cliff_router.get("/item/{item_id}", response_model=ItemRead)
 async def read_item_by_id(item_id: int):
+    """Read item by id."""
     items = await Item.get_item_by_id(id=item_id)
     if not items:
         raise HTTPException(status_code=404, detail=f"No item found with id {item_id}")
@@ -37,6 +39,7 @@ async def read_item_by_id(item_id: int):
 
 @cliff_router.get("/item/brand/{brand_name}", response_model=List[ItemRead])
 async def read_item_by_brand_name(brand_name: str):
+    """Get all items with the given brand_name."""
     brand_item = await Item.get_item_by_brand_name(brand_name=brand_name)
     if not brand_item:
         raise HTTPException(
@@ -47,6 +50,7 @@ async def read_item_by_brand_name(brand_name: str):
 
 @cliff_router.post("/item")
 async def create_item(item_in: ItemCreate):
+    """Create new item."""
     item_in = jsonable_encoder(item_in)
     item = await Item.create(item_in)
     return item
@@ -54,6 +58,7 @@ async def create_item(item_in: ItemCreate):
 
 @cliff_router.patch("/item/{id}")
 async def update_item(id: int, updated_item: ItemUpdate):
+    """Update the item by id."""
     item = await Item.get_item_by_id(id=id)
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
@@ -68,6 +73,7 @@ async def update_item(id: int, updated_item: ItemUpdate):
 
 @cliff_router.delete("/item/{id}")
 async def delete_item(id: int):
+    """Delete a item by id."""
     item = await Item.get_item_by_id(id=id)
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
@@ -79,6 +85,7 @@ async def delete_item(id: int):
 
 @cliff_router.get("/count_discounted_products")
 async def count_discounted_products():
+    """Number of items having a discount."""
     items_count = await Item.count_discounted_products()
     if not items_count:
         raise HTTPException(status_code=404, detail="No such items found.")
@@ -87,6 +94,7 @@ async def count_discounted_products():
 
 @cliff_router.get("/list_unique_brands", response_model=UniqueBrands)
 async def list_unique_brands():
+    """List of unique brands in the database."""
     unique_brands = await Item.get_unique_brands()
     if not unique_brands:
         raise HTTPException(status_code=404, detail="No unique brands found.")
@@ -100,6 +108,7 @@ async def list_unique_brands():
 
 @cliff_router.get("/count_high_offer_price", response_model=CountOfferPrice)
 async def count_high_offer_price(greater_than: int = 300):
+    """Items with offer_price greater than a given value."""
     items_count = await Item.count_offer_price_greater_than(value=greater_than)
     if not items_count:
         raise HTTPException(status_code=404, detail="No such items found.")
@@ -108,6 +117,7 @@ async def count_high_offer_price(greater_than: int = 300):
 
 @cliff_router.get("/count_high_discount", response_model=DiscountPercentage)
 async def count_high_discount(greater_than: int = 30):
+    """Items with discount % greater than a given value."""
     discount_percentage = await Item.calculate_discount_percentage(value=greater_than)
     if not discount_percentage:
         raise HTTPException(status_code=404, detail="No such items found.")
