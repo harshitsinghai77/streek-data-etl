@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config.database import database, engine, metadata
 from app.config.settings import get_setting
-from app.routers.cliff import cliff_route
+from app.routers.cliff import cliff_router
 
 settings = get_setting()
 metadata.create_all(engine)
@@ -40,7 +40,7 @@ def index():
 
 
 app.include_router(
-    cliff_route,
+    cliff_router,
     prefix="/api",
     tags=["Items"],
 )
