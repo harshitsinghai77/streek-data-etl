@@ -78,7 +78,7 @@ async def delete_item(id: int):
 
 
 @cliff_router.get("/count_discounted_products")
-async def count_high_discount():
+async def count_discounted_products():
     items_count = await Item.count_discounted_products()
     if not items_count:
         raise HTTPException(status_code=404, detail="No such items found.")
