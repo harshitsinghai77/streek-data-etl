@@ -21,3 +21,6 @@ dump_sample_data:
   
 format:
 	bash scripts/format.sh
+
+test:
+	pytest

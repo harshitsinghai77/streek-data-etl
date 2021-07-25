@@ -1,4 +1,5 @@
-pyenv virtualenv 3.9.6 cliff-venv
+pyenv install 3.9.5
+pyenv virtualenv 3.9.5 cliff-venv
 
 docker-compose up -d
 

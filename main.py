@@ -45,11 +45,5 @@ app.include_router(
     tags=["Items"],
 )
 
-# app.include_router(
-#     noisli_route,
-#     prefix="/noisli",
-#     tags=["Noisli"],
-# )
-
 if __name__ == "__main__":
     uvicorn.run(app, host=settings.HOST, port=settings.PORT)

@@ -1,4 +1,4 @@
-from sqlalchemy import select
+from sqlalchemy import select, func
 
 from app.config.database import database
 from app.models.item import item
@@ -53,7 +53,7 @@ class Item:
     async def count_discounted_products():
         "Count items having a discount on them."
         dicount_amount = item.c.regular_price_value - item.c.offer_price_value
-        query = item.count().where(dicount_amount > 0)
+        query = select([func.count()]).where(dicount_amount > 0)
         count = await database.execute(query)
         return count
 
@@ -67,7 +67,7 @@ class Item:
     @staticmethod
     async def count_offer_price_greater_than(value: int = 300):
         """Items with offer_price greater than a given value."""
-        query = item.count().where(item.c.offer_price_value > value)
+        query = select([func.count()]).where(item.c.offer_price_value > value)
         results = await database.execute(query)
         return results
 
