@@ -2,6 +2,7 @@ from typing import Dict
 
 from app.config.database import database
 from app.models.item import item
+from sqlalchemy import select
 
 
 class Item:
@@ -48,3 +49,10 @@ class Item:
         query = item.delete().where(item.c.id == id).returning(item.c.id)
         query_id = await database.execute(query)
         return query_id
+
+    @staticmethod
+    async def get_unique_brands():
+        """Get unique brands in the database."""
+        query = select([item.c.brand_name], distinct=True)
+        results = await database.fetch_all(query)
+        return results

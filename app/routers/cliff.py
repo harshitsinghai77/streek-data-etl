@@ -68,3 +68,16 @@ async def delete_item(id: int):
     if query_id:
         return {"success": True, "id": query_id}
     return {"success": False}
+
+
+@cliff_router.get("/list_unique_brands")
+async def list_unique_brands():
+    unique_brands = await Item.get_unique_brands()
+    if not unique_brands:
+        raise HTTPException(status_code=404, detail="No unique brands found.")
+
+    unique_brands_lst = [brand["brand_name"] for brand in unique_brands]
+    return {
+        "count_unique_brands": len(unique_brands_lst),
+        "unique_brands": unique_brands_lst,
+    }
