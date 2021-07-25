@@ -38,6 +38,15 @@ class ItemCreate(ItemBase):
 class ItemUpdate(ItemBase):
     """Properties to receive on item update."""
 
+    pass
+
+
+class ItemDelete(BaseModel):
+    """Properties to delete an item."""
+
+    success: bool
+    id: int
+
 
 class UniqueBrands(BaseModel):
     """Properties to get unique brands in the database."""
@@ -46,8 +55,8 @@ class UniqueBrands(BaseModel):
     unique_brands: List[str]
 
 
-class CountOfferPrice(BaseModel):
-    """Properties to count offer price."""
+class GetCount(BaseModel):
+    """Properties to return count."""
 
     count: int
 

@@ -10,7 +10,7 @@ item = Table(
     Column("brand_name", String),
     Column("regular_price_value", Numeric),
     Column("offer_price_value", Numeric),
-    Column("currency", String(length=5)),
+    Column("currency", String),
     Column("classification_l1", Text),
     Column("classification_l2", Text),
     Column("classification_l3", Text),

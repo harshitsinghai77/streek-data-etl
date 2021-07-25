@@ -7,11 +7,12 @@ from fastapi.exceptions import HTTPException
 
 from app.crud.item import Item
 from app.schemas.item import (
-    CountOfferPrice,
+    GetCount,
     DiscountPercentage,
     ItemCreate,
     ItemRead,
     ItemUpdate,
+    ItemDelete,
     UniqueBrands,
 )
 
@@ -48,7 +49,7 @@ async def read_item_by_brand_name(brand_name: str):
     return brand_item
 
 
-@cliff_router.post("/item")
+@cliff_router.post("/item", response_model=ItemRead)
 async def create_item(item_in: ItemCreate):
     """Create new item."""
     item_in = jsonable_encoder(item_in)
@@ -71,19 +72,17 @@ async def update_item(id: int, updated_item: ItemUpdate):
     return item
 
 
-@cliff_router.delete("/item/{id}")
+@cliff_router.delete("/item/{id}", response_model=ItemDelete)
 async def delete_item(id: int):
     """Delete a item by id."""
     item = await Item.get_item_by_id(id=id)
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
     query_id = await Item.remove(id=id)
-    if query_id:
-        return {"success": True, "id": query_id}
-    return {"success": False}
+    return {"success": True, "id": query_id}
 
 
-@cliff_router.get("/count_discounted_products")
+@cliff_router.get("/count_discounted_products", response_model=GetCount)
 async def count_discounted_products():
     """Number of items having a discount."""
     items_count = await Item.count_discounted_products()
@@ -106,7 +105,7 @@ async def list_unique_brands():
     }
 
 
-@cliff_router.get("/count_high_offer_price", response_model=CountOfferPrice)
+@cliff_router.get("/count_high_offer_price", response_model=GetCount)
 async def count_high_offer_price(greater_than: int = 300):
     """Items with offer_price greater than a given value."""
     items_count = await Item.count_offer_price_greater_than(value=greater_than)
