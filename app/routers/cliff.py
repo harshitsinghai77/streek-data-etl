@@ -77,6 +77,14 @@ async def delete_item(id: int):
     return {"success": False}
 
 
+@cliff_router.get("/count_discounted_products")
+async def count_high_discount():
+    items_count = await Item.count_discounted_products()
+    if not items_count:
+        raise HTTPException(status_code=404, detail="No such items found.")
+    return {"count": items_count}
+
+
 @cliff_router.get("/list_unique_brands", response_model=UniqueBrands)
 async def list_unique_brands():
     unique_brands = await Item.get_unique_brands()

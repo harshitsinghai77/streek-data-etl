@@ -51,6 +51,14 @@ class Item:
         return query_id
 
     @staticmethod
+    async def count_discounted_products():
+        "Count products having a discount on them."
+        dicount_amount = item.c.regular_price_value - item.c.offer_price_value
+        query = item.count().where(dicount_amount > 0)
+        count = await database.execute(query)
+        return count
+
+    @staticmethod
     async def get_unique_brands():
         """Get unique brands in the database."""
         query = select([item.c.brand_name], distinct=True)
