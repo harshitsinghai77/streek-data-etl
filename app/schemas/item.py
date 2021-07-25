@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 from pydantic import BaseModel
 
@@ -39,3 +39,23 @@ class ItemUpdate(ItemBase):
     """Properties to receive on item update"""
 
     pass
+
+
+class UniqueBrands(BaseModel):
+    count_unique_brands: int
+    unique_brands: List[str]
+
+
+class CountOfferPrice(BaseModel):
+    count: int
+
+
+class Discount(BaseModel):
+    name: str
+    brand_name: str
+    discount_percentage: int
+
+
+class DiscountPercentage(BaseModel):
+    count: int
+    items: List[Discount]

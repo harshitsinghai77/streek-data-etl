@@ -56,3 +56,28 @@ class Item:
         query = select([item.c.brand_name], distinct=True)
         results = await database.fetch_all(query)
         return results
+
+    @staticmethod
+    async def count_offer_price_greater_than(value: int = 300):
+        """No. of products having offer price greater than a value."""
+        query = item.count().where(item.c.offer_price_value > value)
+        results = await database.execute(query)
+        return results
+
+    @staticmethod
+    async def calculate_discount_percentage(value: int = 30):
+        """
+        To calculate the discount percentage following approach is used:
+        1. Subtract the regular_price_value from offer_price_value.
+        2. Divide this new number by the regular_price_value.
+        3. Multiply the resultant number by 100.
+        """
+        percentage_query = item.c.regular_price_value - item.c.offer_price_value
+        percentage_query = (percentage_query / item.c.regular_price_value) * 100
+        percentage_query = percentage_query.label("discount_percentage")
+
+        query = select([item.c.name, item.c.brand_name, percentage_query]).where(
+            percentage_query > value
+        )
+        results = await database.fetch_all(query)
+        return results
