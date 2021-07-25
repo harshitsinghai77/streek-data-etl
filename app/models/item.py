@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Table, Text, Numeric
+from sqlalchemy import Column, Integer, Numeric, String, Table, Text
 
 from app.config.database import metadata
 

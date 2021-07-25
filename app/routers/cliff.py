@@ -2,17 +2,17 @@ import logging
 from typing import List
 
 from fastapi import APIRouter
-from fastapi.exceptions import HTTPException
 from fastapi.encoders import jsonable_encoder
+from fastapi.exceptions import HTTPException
 
 from app.crud.item import Item
 from app.schemas.item import (
-    ItemUpdate,
-    ItemCreate,
-    ItemRead,
-    UniqueBrands,
     CountOfferPrice,
     DiscountPercentage,
+    ItemCreate,
+    ItemRead,
+    ItemUpdate,
+    UniqueBrands,
 )
 
 LOGGER = logging.getLogger()

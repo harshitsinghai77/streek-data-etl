@@ -1,5 +1,5 @@
-from typing import Optional, List
-
+"""Pydantic Schema"""
+from typing import List, Optional
 from pydantic import BaseModel
 
 
@@ -37,8 +37,6 @@ class ItemCreate(ItemBase):
 
 class ItemUpdate(ItemBase):
     """Properties to receive on item update."""
-
-    pass
 
 
 class UniqueBrands(BaseModel):

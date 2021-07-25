@@ -1,8 +1,7 @@
-from typing import Dict
+from sqlalchemy import select
 
 from app.config.database import database
 from app.models.item import item
-from sqlalchemy import select
 
 
 class Item:
@@ -37,7 +36,7 @@ class Item:
         return {"id": last_record, **item_dict}
 
     @staticmethod
-    async def update(id: str, item_obj: Dict):
+    async def update(id: int, item_obj):
         """Update an item."""
         query = item.update().where(item.c.id == id).values(**item_obj)
         await database.execute(query)

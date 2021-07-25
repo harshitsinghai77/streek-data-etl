@@ -13,13 +13,11 @@ psycopg2 = "^2.9.1"
 python-dotenv = "^0.19.0"
 
 [tool.poetry.dev-dependencies]
-mypy = "^0.910"
 black = "^21.7b0"
 isort = "^5.9.2"
 autoflake = "^1.4"
 flake8 = "^3.9.2"
 pytest = "^6.2.4"
-sqlalchemy-stubs = "^0.4"
 pytest-cov = "^2.12.1"
 
 [build-system]
