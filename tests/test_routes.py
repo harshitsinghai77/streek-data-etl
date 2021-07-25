@@ -48,7 +48,6 @@ def test_create_item(client):
     item_obj["id"] = item_id
 
     # Check if the obj is successfully created.
-    item_obj["id"] = item_id
     response = client.get(f"/api/item/{item_id}")
     assert response.status_code == 200
     assert response.json() == item_obj
@@ -101,6 +100,12 @@ def test_update_item(client):
     assert response.status_code == 200
     assert response.json()["regular_price_value"] == updated_item["regular_price_value"]
 
+    response = client.patch("/api/item/8912", json=updated_item)
+    assert response.status_code == 404
+
+    response = client.patch("/api/item/8912", json={})
+    assert response.status_code == 404
+
 
 def test_delete_item(client):
     for id in item_id_lst:
@@ -136,6 +141,9 @@ def test_count_high_offer_price(client):
     assert response.status_code == 200
     assert response.json()["count"] == 87
 
+    response = client.get("/api/count_high_offer_price?greater_than=10000")
+    assert response.status_code == 404
+
 
 def test_count_high_discount(client):
     response = client.get("/api/count_high_discount")
@@ -145,3 +153,6 @@ def test_count_high_discount(client):
     response = client.get("/api/count_high_discount?greater_than=70")
     assert response.status_code == 200
     assert response.json()["count"] == 41
+
+    response = client.get("/api/count_high_discount?greater_than=120")
+    assert response.status_code == 404
