@@ -4,9 +4,6 @@ install:
 export_requirments.txt:
 	poetry export -f requirements.txt --output requirements.txt
 
-deploy:
-	git push heroku master
-
 runserver:
 	uvicorn main:app --reload
 
