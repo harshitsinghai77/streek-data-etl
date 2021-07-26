@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: [ubuntu-latest]
+
+    services:
+      postgres:
+        image: postgres:10.4-alpine
+        env:
+          POSTGRES_DB: "cliff"
+          POSTGRES_USER: "cliff"
+          POSTGRES_PASSWORD: "password"
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Dump Sample Data
+        uses: tj-actions/pg-restore@v4.5
+        with:
+          database_url: "postgres://cliff:password@localhost:5432/cliff"
+          backup_file: "dev/dump/sample.sql"
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1.1.1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - uses: actions/cache@v2
+        name: Poetry Cache
+        with:
+          path: /home/runner/.cache/pypoetry/virtualenvs
+          key: virtualenv-${{ runner.os }}-v2-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            virtualenv-${{ runner.os }}-v2-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        run: make install
+
+      - name: Run tests
+        run: |
+          source .venv/bin/activate
+          make test
+
+      - name: Run Format
+        run: make format
