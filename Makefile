@@ -16,7 +16,7 @@ start_docker_container:
 restore_sample_data:
 	docker exec -i cliff-postgres pg_restore -U cliff -v -d cliff < dev/dump/sample.dump
 
-dump_sample_date:
+dump_sample_data:
 	pg_dump -O -f dev/dump/sample.sql postgres://cliff:password@localhost:5432/cliff
 
 format:
