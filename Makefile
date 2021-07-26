@@ -14,7 +14,7 @@ start_docker_container:
 	docker run -d --name cliff-app -p 5000:5000 cliff-app
 
 restore_sample_data:
-	docker exec -i cliff-data-etl_postgresql_1 pg_restore -U cliff -v -d cliff < dev/dump/sample.dump
+	docker exec -i cliff-postgres pg_restore -U cliff -v -d cliff < dev/dump/sample.dump
 
 dump_sample_date:
 	pg_dump -O -f dev/dump/sample.sql postgres://cliff:password@localhost:5432/cliff
