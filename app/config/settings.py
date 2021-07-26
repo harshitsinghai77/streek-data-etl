@@ -1,15 +1,17 @@
 from functools import lru_cache
-from typing import List
 
-from pydantic import AnyHttpUrl, BaseSettings
+from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
     APP_NAME = "app"
-    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = ["http://localhost:3000"]
+    BACKEND_CORS_ORIGINS = [
+        "http://localhost:3000",
+        "http://localhost",
+    ]
     API_PREFIX = "/api"
     HOST = "localhost"
-    PORT = 8000
+    PORT = 5000
     BASE_URL = "{}:{}/".format(HOST, str(PORT))
     MODELS = [
         "app.models.users",
