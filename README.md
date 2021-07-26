@@ -63,7 +63,7 @@ docker-compose up -d
 
 This will download `postgres:13` image, start the container and expose it to port `5432`
 
-Postgres credentials
+#### Postgres credentials
 
 ```yaml
 POSTGRES_DB: "cliff"
@@ -83,7 +83,7 @@ For more details, check `docker-compose.yml` in the root directory.
 
 Sample data consist of a list of ~5000 e-commerce products and its information. The data can be downloaded [here](https://drive.google.com/file/d/1m0cF742dliCvnbmE3lc-WwxfZNbaikup/view)
 
-#### Dump the data inside the docker container using any of the following two methods
+#### Dump data in Postgres docker container using any of the following two methods
 
 1. via `pg_dump`
 2. via `python script`
@@ -206,7 +206,7 @@ Test endpoint to verify the app is working and the API are served from the docke
 make format
 ```
 
-## CI using GitHub Actions
+## CD using GitHub Actions
 
 Github Actions are used for Continuous Delivery and Continuous Integration.
 
