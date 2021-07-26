@@ -69,4 +69,6 @@ jobs:
           make test
 
       - name: Run Format
-        run: make format
+        run: |
+          source .venv/bin/activate
+          make test

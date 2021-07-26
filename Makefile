@@ -7,11 +7,8 @@ export_requirments:
 deploy:
 	git push heroku master
 
-run_dev_server:
-	uvicorn main:app --reload
-
 runserver:
-	uvicorn main:app --port 5000
+	uvicorn main:app --reload
 
 docker_image:
 	docker build -t cliff-app .
@@ -19,8 +16,11 @@ docker_image:
 start_docker_container:
 	docker run -d --name cliff-app -p 5000:5000 cliff-app
 
-dump_sample_data:
+restore_sample_data:
 	docker exec -i cliff-data-etl_postgresql_1 pg_restore -U cliff -v -d cliff < dev/dump/sample.dump
+
+dump_sample_date:
+	pg_dump -O -f dev/dump/sample.sql postgres://cliff:password@localhost:5432/cliff
 
 format:
 	bash scripts/format.sh
