@@ -26,4 +26,4 @@ format:
 	bash scripts/format.sh
 
 test:
-	pytest
+	pytest --cov=app 
