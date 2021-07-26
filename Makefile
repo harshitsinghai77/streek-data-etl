@@ -1,7 +1,7 @@
 install:
 	poetry install
 
-export_requirments:
+export_requirments.txt:
 	poetry export -f requirements.txt --output requirements.txt
 
 deploy:
