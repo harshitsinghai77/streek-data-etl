@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     PORT = 5000
     BASE_URL = "{}:{}/".format(HOST, str(PORT))
     MODELS = [
-        "app.models.users",
+        "app.models.item",
     ]
 
     class Config:

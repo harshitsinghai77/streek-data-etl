@@ -66,7 +66,7 @@ class Item:
 
     @staticmethod
     async def count_offer_price_greater_than(value: int = 300):
-        """Items with offer_price greater than a given value."""
+        """No. of items with offer_price greater than a given value."""
         query = select([func.count()]).where(item.c.offer_price_value > value)
         results = await database.execute(query)
         return results

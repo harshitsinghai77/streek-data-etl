@@ -88,7 +88,7 @@ Sample data consist of a list of ~5000 e-commerce products and its information. 
 1. via `pg_dump`
 2. via `python script`
 
-### Dump data via pg_dump (Recommended)
+### Dump csv data via pg_dump (Recommended)
 
 ```bash
 make restore_sample_data
@@ -96,7 +96,7 @@ make restore_sample_data
 
 This will ssh into the postgres docker container and then dump data from `dev/dump/sample.dump`
 
-### Dump data via python script.
+### Dump csv data via python script.
 
 First run the server using
 

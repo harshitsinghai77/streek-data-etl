@@ -41,7 +41,7 @@ def index():
 
 app.include_router(
     cliff_router,
-    prefix="/api",
+    prefix=settings.API_PREFIX,
     tags=["Items"],
 )
 
