@@ -168,6 +168,8 @@ http://127.0.0.1:5000/redoc
 make test
 ```
 
+Test coverage `98%`
+
 ## Deploy using Docker
 
 Before creating the docker image, edit the `.env` file and change `DB_HOST` to your machine IP address.
