@@ -7,8 +7,11 @@ export_requirments:
 deploy:
 	git push heroku master
 
-runserver:
+run_dev_server:
 	uvicorn main:app --reload
+
+runserver:
+	uvicorn main:app --port 5000
 
 docker_image:
 	docker build -t cliff-app .

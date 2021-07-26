@@ -1,0 +1,10 @@
+__pycache__
+.github/
+tests/
+.env.*
+.git.*
+*.cfg
+*.yaml
+*.md
+Procfile
+*.txt
