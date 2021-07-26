@@ -5,7 +5,7 @@ export_requirments.txt:
 	poetry export -f requirements.txt --output requirements.txt
 
 runserver:
-	uvicorn main:app --reload
+	uvicorn main:app --reload --port 5000
 
 docker_image:
 	docker build -t cliff-app .
