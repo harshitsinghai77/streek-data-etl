@@ -5,7 +5,7 @@
 ### Install with Docker (highly recommended)
 
 ```bash
-docker run -d -p 5000:5000 --name cliff-app harshitsinghai77/cliff-ai:latest
+docker run -d -p 5000:5000 --name streek-app harshitsinghai77/streek-ai:latest
 ```
 
 The docker container assumes Postgres running in the IP Address. To change the IP Address, SSH into the container and change `DB_HOST` in the `.env` file.
@@ -13,9 +13,9 @@ The docker container assumes Postgres running in the IP Address. To change the I
 ### Install for development
 
 ```shell
-git clone https://github.com/harshitsinghai77/cliff-ai-data-etl.git
+git clone https://github.com/harshitsinghai77/streek-ai-data-etl.git
 
-cd cliff-ai-data-etl
+cd streek-ai-data-etl
 ```
 
 Rename `.env.example` to `.env`
@@ -28,10 +28,10 @@ Make sure you have pyenv and poetry installed
 
 ```shell
 pyenv install 3.9.5
-pyenv virtualenv 3.9.5 cliff-venv
+pyenv virtualenv 3.9.5 streek-venv
 ```
 
-Create a file named `.python-version` with content `cliff-venv` that way your virtual environment will automatically get activated when you `cd` into `cliff-ai-data-etl` directory. If for some reason your auto-activation is not working then you can manually activate using `pyenv activate cliff-venv`.
+Create a file named `.python-version` with content `streek-venv` that way your virtual environment will automatically get activated when you `cd` into `streek-ai-data-etl` directory. If for some reason your auto-activation is not working then you can manually activate using `pyenv activate streek-venv`.
 
 You can also use the script to create venv using virtualenv
 
@@ -66,8 +66,8 @@ This will download `postgres:13` image, start the container and expose it to por
 #### Postgres credentials
 
 ```yaml
-POSTGRES_DB: "cliff"
-POSTGRES_USER: "cliff"
+POSTGRES_DB: "streek"
+POSTGRES_USER: "streek"
 POSTGRES_PASSWORD: "password"
 ```
 
@@ -153,14 +153,14 @@ and go to http://127.0.0.1:5000/docs
 
 to test the endpoints via web UI.
 
-![Swagger Documentation](https://i.ibb.co/891nKrk/cliff-ai-api-screenshot.png)
+![Swagger Documentation](https://i.ibb.co/891nKrk/streek-ai-api-screenshot.png)
 
 ## API Documentation
 
 For API documentation go to
 http://127.0.0.1:5000/redoc
 
-![Redoc documentation](https://i.ibb.co/zRjn3Dk/cliff-redoc-documentation.png)
+![Redoc documentation](https://i.ibb.co/zRjn3Dk/clistreekff-redoc-documentation.png)
 
 ## Testing
 
@@ -178,7 +178,7 @@ Before creating the docker image, edit the `.env` file and change `DB_HOST` to y
 
 For example `DB_HOST=192.168.29.63`
 
-This is because localhost is not accessible from inside the Docker container. Thus, cliff docker container will not be able to access the Postgres container and the app will crash.
+This is because localhost is not accessible from inside the Docker container. Thus, streek docker container will not be able to access the Postgres container and the app will crash.
 
 Change `DB_HOST` in `.env` to point to your IP address and then create a docker image using
 
@@ -212,9 +212,9 @@ Github Actions are used for Continuous Delivery and Continuous Integration.
 
 Github Actions will be triggered on every pull request. Edit the `.github/workflows/ci.yml` if required.
 
-Check https://github.com/harshitsinghai77/cliff-ai-data-etl/actions
+Check https://github.com/harshitsinghai77/streek-ai-data-etl/actions
 
-![Github Action](https://i.ibb.co/h8ssSPV/cliff-github-actions.png)
+![Github Action](https://i.ibb.co/h8ssSPV/streek-github-actions.png)
 
 Github workflow consists of installing Postgres service, installing dependencies, dumping sample data to Postgres, running tests, formatting code, authenticating to DockerHub, creating a docker image and pushing the image to DockerHub.
 

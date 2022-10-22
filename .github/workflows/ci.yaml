@@ -21,8 +21,8 @@ jobs:
       postgres:
         image: postgres:10.4-alpine
         env:
-          POSTGRES_DB: "cliff"
-          POSTGRES_USER: "cliff"
+          POSTGRES_DB: "streek"
+          POSTGRES_USER: "streek"
           POSTGRES_PASSWORD: "password"
         options: >-
           --health-cmd pg_isready
@@ -43,7 +43,7 @@ jobs:
       - name: Dump Sample Data
         uses: tj-actions/pg-restore@v4.5
         with:
-          database_url: "postgres://cliff:password@localhost:5432/cliff"
+          database_url: "postgres://streek:password@localhost:5432/streek"
           backup_file: "dev/dump/sample.sql"
 
       - name: Set up Python 3.9
@@ -84,10 +84,10 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: build cliff-app container
+      - name: build streek-app container
         uses: docker/build-push-action@v2
         with:
           context: ./
           file: ./Dockerfile
-          tags: harshitsinghai77/cliff-ai:latest
+          tags: harshitsinghai77/streek-ai:latest
           push: true

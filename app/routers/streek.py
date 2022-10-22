@@ -17,10 +17,10 @@ from app.schemas.item import (
 )
 
 LOGGER = logging.getLogger()
-cliff_router = APIRouter()
+streek_router = APIRouter()
 
 
-@cliff_router.get("/items", response_model=List[ItemRead])
+@streek_router.get("/items", response_model=List[ItemRead])
 async def read_item(skip: int = 0, limit: int = 100):
     """Read all items in the database."""
     items = await Item.get(limit=limit, skip=skip)
@@ -29,7 +29,7 @@ async def read_item(skip: int = 0, limit: int = 100):
     return items
 
 
-@cliff_router.get("/item/{item_id}", response_model=ItemRead)
+@streek_router.get("/item/{item_id}", response_model=ItemRead)
 async def read_item_by_id(item_id: int):
     """Read item by id."""
     items = await Item.get_item_by_id(id=item_id)
@@ -38,7 +38,7 @@ async def read_item_by_id(item_id: int):
     return items
 
 
-@cliff_router.get("/item/brand/{brand_name}", response_model=List[ItemRead])
+@streek_router.get("/item/brand/{brand_name}", response_model=List[ItemRead])
 async def read_item_by_brand_name(brand_name: str):
     """Get all items with the given brand_name."""
     brand_item = await Item.get_item_by_brand_name(brand_name=brand_name)
@@ -49,7 +49,7 @@ async def read_item_by_brand_name(brand_name: str):
     return brand_item
 
 
-@cliff_router.post("/item", response_model=ItemRead)
+@streek_router.post("/item", response_model=ItemRead)
 async def create_item(item_in: ItemCreate):
     """Create new item."""
     item_in = jsonable_encoder(item_in)
@@ -57,7 +57,7 @@ async def create_item(item_in: ItemCreate):
     return item
 
 
-@cliff_router.patch("/item/{id}")
+@streek_router.patch("/item/{id}")
 async def update_item(id: int, updated_item: ItemUpdate):
     """Update the item by id."""
     item = await Item.get_item_by_id(id=id)
@@ -72,7 +72,7 @@ async def update_item(id: int, updated_item: ItemUpdate):
     return item
 
 
-@cliff_router.delete("/item/{id}", response_model=ItemDelete)
+@streek_router.delete("/item/{id}", response_model=ItemDelete)
 async def delete_item(id: int):
     """Delete a item by id."""
     item = await Item.get_item_by_id(id=id)
@@ -82,7 +82,7 @@ async def delete_item(id: int):
     return {"success": True, "id": query_id}
 
 
-@cliff_router.get("/count_discounted_products", response_model=GetCount)
+@streek_router.get("/count_discounted_products", response_model=GetCount)
 async def count_discounted_products():
     """Number of items having a discount."""
     items_count = await Item.count_discounted_products()
@@ -91,7 +91,7 @@ async def count_discounted_products():
     return {"count": items_count}
 
 
-@cliff_router.get("/list_unique_brands", response_model=UniqueBrands)
+@streek_router.get("/list_unique_brands", response_model=UniqueBrands)
 async def list_unique_brands():
     """List of unique brands in the database."""
     unique_brands = await Item.get_unique_brands()
@@ -105,7 +105,7 @@ async def list_unique_brands():
     }
 
 
-@cliff_router.get("/count_high_offer_price", response_model=GetCount)
+@streek_router.get("/count_high_offer_price", response_model=GetCount)
 async def count_high_offer_price(greater_than: int = 300):
     """Items with offer_price greater than a given value."""
     items_count = await Item.count_offer_price_greater_than(value=greater_than)
@@ -114,7 +114,7 @@ async def count_high_offer_price(greater_than: int = 300):
     return {"count": items_count}
 
 
-@cliff_router.get("/count_high_discount", response_model=DiscountPercentage)
+@streek_router.get("/count_high_discount", response_model=DiscountPercentage)
 async def count_high_discount(greater_than: int = 30):
     """Items with discount % greater than a given value."""
     discount_percentage = await Item.calculate_discount_percentage(value=greater_than)

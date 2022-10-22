@@ -1,7 +1,7 @@
 """Helper module to dump csv file to the postgres database."""
 import psycopg2
 
-DATABASE_URL = "postgresql://cliff:password@localhost:5432/cliff"
+DATABASE_URL = "postgresql://streek:password@localhost:5432/streek"
 TABLE_NAME = "core_item"
 CSV_FILE_PATH = "dev/dump/Greendeck SE Assignment Task 1.csv"
 

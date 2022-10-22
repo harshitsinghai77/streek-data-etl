@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "cliff-ai"
+name = "streek-ai"
 version = "0.1.0"
 description = "Backend to interact with the database using FAST API."
 authors = ["harshitsinghai77 <harshitsinghai77@gmail.com>"]

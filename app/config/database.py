@@ -3,8 +3,8 @@ import os
 import databases
 import sqlalchemy
 
-DB_NAME = os.getenv("DB_NAME", "cliff")
-DB_USER = os.getenv("DB_USER", "cliff")
+DB_NAME = os.getenv("DB_NAME", "streek")
+DB_USER = os.getenv("DB_USER", "streek")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "password")
 DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_PORT = os.getenv("DB_PORT", "5432")
